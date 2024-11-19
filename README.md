@@ -15,11 +15,6 @@
 ![Micro AMD Ryzen 5 4600G](/images/Micro%20AMD%20Ryzen%205%204600G.jpg)
 ![Placa de Video MSI Nvidia Geforce RTX 4060](/images/Placa%20de%20Video%20MSI%20Nvidia%20Geforce%20RTX%204060.jpg)
 
-## ¿Publico objetivo?
-
-
-## Diseño
-
 ## Paginas de referencia
 
 - [Fravega](https://www.fravega.com/l/informatica/accesorios-de-informatica/)
