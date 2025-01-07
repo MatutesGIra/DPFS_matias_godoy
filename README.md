@@ -1,4 +1,4 @@
-# ElectroZon
+# Pixel Shop
 
 ## ¿Quienes somos? ¿Que ofrecemos?
 - Ofrecemos una amplia gama de productos electrónicos de última generación, desde gadgets innovadores hasta accesorios esenciales para gaming, fotografía y computación.
