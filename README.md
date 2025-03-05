@@ -4,7 +4,6 @@
 - Ofrecemos una amplia gama de productos electrónicos de última generación, desde gadgets innovadores hasta accesorios esenciales para gaming, fotografía y computación.
 - Los jugadores encuentran todo lo que necesitan, desde teclados y ratones de alto rendimiento hasta consolas de última generación y accesorios especializados.
 - Ofrecemos una variedad de periféricos y componentes de PC que mejoran el rendimiento y la productividad.
-![Consola de Juegos Retro Portatil](/images/Consola%20de%20Juegos%20retro%20portátil.png)
 ![Funda Para Notebook Gadnic](/images/Funda%20Para%20Notebook%20Gadnic.jpg)
 ![Mesa Notebook](/images/Mesa%20Notebook.jpg)
 ![Monitor Gamer Daewoo](/images/Monitor%20Gamer%20Daewoo.jpg)
@@ -22,5 +21,15 @@
 - [Insumos Informaticos](https://www.insumosinformaticos.com.ar/)
 - [Andes PC](https://www.andespc.com/)
 - [Full H4rd](https://fullh4rd.com.ar/)
+
+## Colores
+.color1 { #1F271B};
+.color2 { #61A0AF};
+.color3 { #E3B5A4};
+.color4 { #A80874};
+.color5 { #0E0F19};
+
+## Tablero
+- [Tablero Trello DPFS](https://trello.com/invite/b/673c88a9d7bb846d15461a64/ATTI7f8e64880cdc5a56d4eb133a41282ba1941747A8/dpfsmatiasgodoy)
 
 ### Matias Godoy
