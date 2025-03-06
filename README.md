@@ -7,7 +7,7 @@
 ![Funda Para Notebook Gadnic](/images/products/Funda%20Para%20Notebook%20Gadnic.jpg)
 ![Mesa Notebook](/images/products/Mesa%20Notebook.jpg)
 ![Monitor Gamer Daewoo](/images/products/Monitor%20Gamer%20Daewoo.jpg)
-![Mouse Inalámbrico Logitech](/images/products/Mouse%20Inalámbrico%20Logitech.jpg)
+![Mouse Inalámbrico Logitech](/images/products/Mouse%20inalambrico%20logitech.png)
 ![Teclado Gamer Exo](/images/products/Teclado%20Gamer%20Exo.jpg)
 ![Disco Solido SSD 2TB Kingston](/images/products/Disco%20Solido%20SSD%202TB%20Kingston.jpg)
 ![Memoria Ram Kingston 8GB](/images/products/Memoria%20Ram%20Kingston%208GB.jpg)
@@ -23,11 +23,11 @@
 - [Full H4rd](https://fullh4rd.com.ar/)
 
 ## Colores
-.color1 { #1F271B};
-.color2 { #61A0AF};
-.color3 { #E3B5A4};
-.color4 { #A80874};
-.color5 { #0E0F19};
+- ![#1F271B](https://placehold.co/15x15/1f271b/1f271b.png) `#1F271B`
+- ![#61A0AF](https://placehold.co/15x15/61a0af/61a0af.png) `#61A0AF`
+- ![#E3B5A4](https://placehold.co/15x15/e3b5a4/e3b5a4.png) `#E3B5A4`
+- ![#A80874](https://placehold.co/15x15/a80874/a80874.png) `#A80874`
+- ![#0E0F19](https://placehold.co/15x15/0e0f19/0e0f19.png) `#0E0F19`
 
 ## Tablero
 - [Tablero Trello DPFS](https://trello.com/invite/b/673c88a9d7bb846d15461a64/ATTI7f8e64880cdc5a56d4eb133a41282ba1941747A8/dpfsmatiasgodoy)
