@@ -5,55 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Shop</title>
-</head>
-<body>
-    <!-- Nav -->
-    <nav>
-        <div>
-            <img src="" alt="logo de la pagina">
-        </div>
-        <div>
-            <ul type="none">
-                <li><a href="./home.html">Principal</a></li>
-                <li><a href="./store.html">Tienda</a></li>
-                <li><a href="./foro.html">Foro</a></li>
-                <li><a href="./news.html">Noticias</a></li>
-                <li><a href="./contact.html">Ayuda</a></li>
 
-            </ul>
+    <!-- CSS-->
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="general.css">
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav>
+        <div class="icon-container">
+            <a href="./index.html"><img src="" alt="logo de la pagina"></a>
         </div>
         <div>
-            <ul type="none">
-                <li><a href="./cart.html"><img src="./images/design/carrito.png" alt="carrito de compras"></a></li>
-                <li><a href="./register.html"><img src="./images/design/Icono Usuario.png" alt="icono de usuario"></a></li>
+            <ul class="personal">
+                <li class="icon-container"><a href="./cart.html"><img src="./images/design/iconos/carro.png"
+                            alt="carrito de compras"></a></li>
+                <li class="usu"><a href="./login.html">Ingresar</a>
+                </li>
+                <li class="usu"><a href="./register.html">Registrar</a>
+                </li>
             </ul>
         </div>
     </nav>
+    <!-- MAIN -->
     <main>
-        <section>
-        <form action="/" method="post">
-            <div>
-                <label for="usu">Usuario</label>
-                <input type="text" name="usu" id="usu">
-            </div>
+        <section id="formulario">
+            <form action="/" method="post">
+                <h3>Ingresar</h3>
+                <div>
+                    <label for="usu">Usuario</label>
+                    <input type="text" name="usu" id="usu">
+                </div>
 
-            <div>
-                <label for="pass">Contraseña</label>
-                <input type="password" name="pass" id="pass">
-            </div>
+                <div>
+                    <label for="pass">Contraseña</label>
+                    <input type="password" name="pass" id="pass">
+                </div>
 
-            <div>
-                <label for="rememberme">Recuerdame</label>
-                <input type="checkbox" name="rememberme" id="rememberme">
-            </div>
+                <div>
+                    <label for="rememberme">Recuerdame</label>
+                    <input type="checkbox" name="rememberme" id="rememberme">
+                </div>
 
+                <div class="enviar">
+                    <input type="submit" value="Entrar">
+                </div>
+            </form>
             <div>
-                <input type="submit" value="Entrar">
+                <a class="recuperar" href="">Olvidaste tu contraseña o usuario?</a>
             </div>
-        </form>
-        <div>
-            <a href="">Olvidaste tu contraseña o usuario?</a>
-        </div>
         </section>
     </main>
 </body>

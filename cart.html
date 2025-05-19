@@ -5,32 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Shop</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
-    <!-- Nav -->
+    <!-- NAV -->
     <nav>
-        <div>
-            <img src="" alt="logo de la pagina">
+        <div class="icon-container">
+            <a href="./index.html"><img src="" alt="logo de la pagina"></a>
         </div>
         <div>
-            <ul type="none">
-                <li><a href="./home.html">Principal</a></li>
-                <li><a href="./store.html">Tienda</a></li>
-                <li><a href="./foro.html">Foro</a></li>
-                <li><a href="./news.html">Noticias</a></li>
-                <li><a href="./contact.html">Ayuda</a></li>
-
-            </ul>
-        </div>
-        <div>
-            <ul type="none">
-                <li><a href="./cart.html"><img src="./images/design/carrito.png" alt="carrito de compras"></a></li>
-                <li><a href="./register.html"><img src="./images/design/Icono Usuario.png" alt="icono de usuario"></a>
+            <ul class="personal">
+                <li class="icon-container"><a href="./cart.html"><img src="./images/design/iconos/carro.png"
+                            alt="carrito de compras"></a></li>
+                <li class="usu"><a href="./login.html">Ingresar</a>
+                </li>
+                <li class="usu"><a href="./register.html">Registrar</a>
                 </li>
             </ul>
         </div>
     </nav>
+    <!-- MAIN -->
     <main>
         <h1>Carrito de compras</h1>
         <section>
@@ -59,25 +56,25 @@
             </div>
         </section>
     </main>
+    <!-- FOOTER -->
     <footer>
+        <div class="icon-container"><img src="" alt="logo de la pagina"></div>
         <div>
-            <ul>
-                <li><a href=""><img src="./images/design/icono Facebook.png" alt="icono Facebook"></a></li>
-                <li><a href=""><img src="./images/design/Icono Instagram.png" alt="icono Instagram"></a></li>
-                <li><a href=""><img src="./images/design/icono whatsapp.png" alt="icono whatsapp"></a></li>
-                <li><a href=""><img src="./images/design/icono youtube.png" alt="icono youtube"></a></li>
+            <ul class="redes">
+                <li class="icon-container"><a href=""><img src="./images/design/iconos/facebook.png" alt="icono Facebook"></a></li>
+                <li class="icon-container"><a href=""><img src="./images/design/iconos/instagram.png" alt="icono Instagram"></a></li>
+                <li class="icon-container"><a href=""><img src="./images/design/iconos/whatsapp.png" alt="icono whatsapp"></a></li>
             </ul>
-            <img src="" alt="logo de la pagina">
+            
         </div>
         <div>
-            <ul>
-                <li></li><img src="./images/design/icono correo.png" alt="icono correo"><a
-                    href="mailto:godoyiramain01@gmail.com">godoyiramain01@gmail.com</a></li>
-                <li><img src="./images/design/icono telefono.png" alt="icono telefono"><a
-                        href="tel:+54 9 381 639-9663">+54 9 381
-                        639-9663</a></li>
-                <li><img src="./images/design/icono de direccion.png" alt="icono direccion
-                ">Av. Gobernador del Campo 620 T4000GRP San Miguel de Tucumán, Tucumán</li>
+            <ul class="contact">
+                <li class="icon-container"><a
+                    href="mailto:godoyiramain01@gmail.com"><img src="./images/design/iconos/correo.png" alt="icono correo"></a></li>
+                <li class="icon-container"><a
+                        href="tel:+54 9 381 639-9663"><img src="./images/design/iconos/telefono.png" alt="icono telefono"></a></li>
+                <li class="icon-container"><img src="./images/design/iconos/punto.png" alt="icono direccion
+                "></li>
             </ul>
         </div>
     </footer>

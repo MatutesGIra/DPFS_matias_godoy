@@ -1,0 +1,67 @@
+#destacados {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    padding: 1rem;
+}
+
+.art-sect{
+    background-color: brown;
+    display: block;
+    padding: 1rem;
+    max-width: fit-content;
+}
+
+.articulos{
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.post{
+    display: block;
+    max-width: 200px;
+    padding-right: 2rem;
+}
+
+.img-container{
+    width: 220px;
+    height: 220px;
+}
+
+#formulario{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10rem;
+}
+
+form {
+    padding: 2rem;
+    border: 0.1rem black solid;
+}
+
+.enviar{
+    margin-left: 6rem;
+    padding: 0.5rem;
+    width: fit-content;
+    border: 0.1rem rgb(131, 32, 32) solid;
+    background-color: rgb(197, 53, 53);
+    display: flex;
+    justify-content: center;
+}
+.enviar input{
+    background-color: rgb(197, 53, 53);
+}
+
+.recuperar {
+    color: blue;
+}
+
+#usu, #pass, #name, #ape, #mail{
+    border: 0.1rem black solid;
+}
+
