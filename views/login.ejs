@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <!-- NAV -->
+    <%- include('./partials/nav.ejs') %>
+    <!-- MAIN -->
+    <main>
+        <section id="formulario">
+            <form action="/" method="post">
+                <h3>Ingresar</h3>
+                <div>
+                    <label for="usu">Usuario</label>
+                    <input type="text" name="usu" id="usu">
+                </div>
+
+                <div>
+                    <label for="pass">Contraseña</label>
+                    <input type="password" name="pass" id="pass">
+                </div>
+
+                <div>
+                    <label for="rememberme">Recuerdame</label>
+                    <input type="checkbox" name="rememberme" id="rememberme">
+                </div>
+
+                <div class="enviar">
+                    <input type="submit" value="Entrar">
+                </div>
+            </form>
+            <div>
+                <a class="recuperar" href="">Olvidaste tu contraseña o usuario?</a>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- HEAD -->
+    <%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <!-- MAIN -->
+    <main>
+        <section id="formulario">
+            <form action="/" method="get">
+                <h3>Registro</h3>
+                <div>
+                    <label for="mail">Email:</label>
+                    <input type="email" name="mail" id="mail">
+                </div>
+
+                <div>
+                    <label for="usu">Usuario:</label>
+                    <input type="text" name="usu" id="usu">
+                </div>
+
+                <div>
+                    <label for="pass">Contraseña:</label>
+                    <input type="password" name="pass" id="pass">
+                </div>
+
+                <div>
+                    <label for="name">Nombre:</label>
+                    <input type="text" name="name" id="name">
+                </div>
+
+                <div>
+                    <label for="ape">Apellido:</label>
+                    <input type="text" name="ape" id="ape">
+                </div>
+
+                <div>
+                    <label for="birthdate">Fecha de nacimiento:</label>
+                    <input type="date" name="birthdate" id="birthdate">
+                </div>
+
+                <div>
+                    <input class="enviar" type="submit" value="Registrarse">
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
