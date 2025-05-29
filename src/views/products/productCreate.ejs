@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <%- include('../partials/nav.ejs') %>
+
+            <main>
+                <section id="formulario">
+                    <form action="">
+                        <h3>Editar detalles de producto</h3>
+                        <div>
+                            <label for="nam">Nombre del producto</label>
+                            <input type="text" name="name" id="nam">
+                        </div>
+                        <div>
+                            <label for="desc">Descripcion</label>
+                            <input type="text" name="descripcion" id="desc" span="3">
+                        </div>
+                        <div>
+                            <label for="img">Imagen</label>
+                            <input type="file" name="imagen" id="img">
+                        </div>
+                        <div>
+                            <label for="cate">Categoria</label>
+                            <select name="categoria" id="cate">
+                                <option value="peri">Periferico</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="est">Categoria</label>
+                            <select name="estado" id="est">
+                                <option value="nuevo">Nuevo</option>
+                                <option value="usado">Usado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="precio">Precio</label>
+                            <input type="number" name="precio" id="precio">
+                        </div>
+                        <div>
+                            <input type="submit" value="Crear!">
+                        </div>
+                    </form>
+                </section>
+
+            </main>
+    </body>
+
+</html>

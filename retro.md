@@ -1,13 +1,12 @@
 ## Comenzar a hacer
-- Mejorar los bocetos a una version mas actualizada y mas agradable a la vista del usuario.
-- Revisar los colores para encontrar lo mas conveniente y agradable.
-- Comenzar con la maquetacion de la pagina.
+- Mejorar los bocetos a una version mas mas agradable a la vista del usuario y que sea visible en celular.
+- Re-elegir los colores.
 
 ## Hacer mas
 - Reveer las clases grabadas en las que no pude participar y organizar los contenidos.
 
 ## Continuar haciendo
-- Organizar el tiempo para poder desarrollar los sprints y estudiar el contenido.
+- Organizar las tareas en Trello
 
 ## Hacer menos
 - 

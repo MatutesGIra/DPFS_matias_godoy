@@ -1,6 +1,6 @@
 const indexController = {
     getHome: (req,res) => {
-        res.render("index.ejs");
+        res.render("products/index");
     },
 };
 module.exports = indexController;
