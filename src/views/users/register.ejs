@@ -8,44 +8,49 @@
     <!-- MAIN -->
     <main>
         <section id="formulario">
-            <form action="/" method="get">
+            <form action="/users/register" method="POST" enctype="multipart/form-data">
                 <h3>Registro</h3>
                 <div>
                     <label for="mail">Email:</label>
-                    <input type="email" name="mail" id="mail">
+                    <input type="email" name="email" id="mail" required>
                 </div>
 
                 <div>
                     <label for="usu">Usuario:</label>
-                    <input type="text" name="usu" id="usu">
+                    <input type="text" name="usuario" id="usu" required>
                 </div>
 
                 <div>
                     <label for="pass">Contraseña:</label>
-                    <input type="password" name="pass" id="pass">
+                    <input type="password" name="password" id="pass" required>
                 </div>
 
                 <div>
                     <label for="name">Nombre:</label>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="firstName" id="name" required>
                 </div>
 
                 <div>
                     <label for="ape">Apellido:</label>
-                    <input type="text" name="ape" id="ape">
+                    <input type="text" name="lastName" id="ape" required>
                 </div>
 
                 <div>
                     <label for="birthdate">Fecha de nacimiento:</label>
-                    <input type="date" name="birthdate" id="birthdate">
+                    <input type="date" name="dateOfBirth" id="birthdate" required>
                 </div>
 
                 <div>
                     <label for="rol">Rol:</label>
-                    <select name="rol" id="rol">
+                    <select name="rol" id="rol" required>
                         <option value="admin">admin</option>
                         <option value="cliente">cliente</option>
                     </select>
+                </div>
+
+                <div>
+                    <label for="avatar">Imagen de perfil:</label>
+                    <input type="file" name="avatar" id="avatar" accept="image/*">
                 </div>
 
                 <div>

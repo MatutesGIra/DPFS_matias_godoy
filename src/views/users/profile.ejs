@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <div class="profile-container">
+        <h1><%= title %></h1>
+        <% if (locals.user) { %>
+            <img src="/images/users/<%= user.avatar %>" alt="Avatar" class="img-container">
+            <p><strong>Usuario:</strong> <%= user.usuario %></p>
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Nombre:</strong> <%= user.firstName %> <%= user.lastName %></p>
+            <p><strong>Fecha de Nacimiento:</strong> <%= user.dateOfBirth %></p>
+            <p><strong>Rol:</strong> <%= user.rol %></p>
+            <a href="/users/logout">Cerrar Sesión</a>
+        <% } %>
+    </div>
+</body>
+</html>
