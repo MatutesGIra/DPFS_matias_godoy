@@ -8,36 +8,36 @@
 
             <main>
                 <section id="formulario">
-                    <form action="">
+                    <form action="/products/<%= product.id %>?_method=PUT" method="post">
                         <h3>Editar detalles de producto</h3>
                         <div>
                             <label for="nam">Nombre del producto</label>
-                            <input type="text" name="name" id="nam">
+                            <input type="text" name="name" id="nam" value="<%= product.name %>">
                         </div>
                         <div>
                             <label for="desc">Descripcion</label>
-                            <input type="text" name="descripcion" id="desc" span="3">
+                            <input type="text" name="description" id="desc" value="<%= product.description %>">
                         </div>
                         <div>
                             <label for="img">Imagen</label>
-                            <input type="file" name="imagen" id="img">
+                            <input type="file" name="image" id="img" value="<%= product.image %>">
                         </div>
                         <div>
                             <label for="cate">Categoria</label>
-                            <select name="categoria" id="cate">
-                                <option value="peri">Periferico</option>
+                            <select name="category" id="cate">
+                                <option value="periferico" <%= product.category === 'periferico' ? 'selected' : '' %>>Periferico</option>
                             </select>
                         </div>
                         <div>
-                            <label for="est">Categoria</label>
-                            <select name="estado" id="est">
-                                <option value="nuevo">Nuevo</option>
-                                <option value="usado">Usado</option>
+                            <label for="est">Estado</label>
+                            <select name="status" id="est">
+                                <option value="nuevo" <%= product.status === 'nuevo' ? 'selected' : '' %>>Nuevo</option>
+                                <option value="usado" <%= product.status === 'usado' ? 'selected' : '' %>>Usado</option>
                             </select>
                         </div>
                         <div>
                             <label for="precio">Precio</label>
-                            <input type="number" name="precio" id="precio">
+                            <input type="number" name="price" id="precio" value="<%= product.price %>">
                         </div>
                         <div>
                             <input type="submit" value="Editar!">

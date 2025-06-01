@@ -8,7 +8,7 @@
 
             <main>
                 <section id="formulario">
-                    <form action="">
+                    <form action="/products/" method="post">
                         <h3>Editar detalles de producto</h3>
                         <div>
                             <label for="nam">Nombre del producto</label>
@@ -16,28 +16,28 @@
                         </div>
                         <div>
                             <label for="desc">Descripcion</label>
-                            <input type="text" name="descripcion" id="desc" span="3">
+                            <input type="text" name="description" id="desc" span="3">
                         </div>
                         <div>
                             <label for="img">Imagen</label>
-                            <input type="file" name="imagen" id="img">
+                            <input type="file" name="image" id="img">
                         </div>
                         <div>
                             <label for="cate">Categoria</label>
-                            <select name="categoria" id="cate">
-                                <option value="peri">Periferico</option>
+                            <select name="category" id="cate">
+                                <option value="periferico">Periferico</option>
                             </select>
                         </div>
                         <div>
                             <label for="est">Categoria</label>
-                            <select name="estado" id="est">
+                            <select name="status" id="est">
                                 <option value="nuevo">Nuevo</option>
                                 <option value="usado">Usado</option>
                             </select>
                         </div>
                         <div>
                             <label for="precio">Precio</label>
-                            <input type="number" name="precio" id="precio">
+                            <input type="number" name="price" id="precio">
                         </div>
                         <div>
                             <input type="submit" value="Crear!">
