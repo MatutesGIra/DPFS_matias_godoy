@@ -35,13 +35,15 @@
           <h4>efectivo</h4>
         </section>
         <section>
-          <div class="enviar">
-            <a href="/products/<%= product.id %>/edit">Editar</a>
-          </div>
-          <form action="/products/<%= product.id %>?_method=DELETE" method="post">
-            <button type="submit"
-              onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')" class="enviar">Eliminar</button>
-          </form>
+          <% if (locals.user && locals.user.rol === 'admin') { %>
+            <div class="enviar">
+                <a href="/products/<%= product.id %>/edit">Editar</a>
+            </div>
+            <form action="/products/<%= product.id %>?_method=DELETE" method="post">
+                <button type="submit"
+                    onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')" class="enviar">Eliminar</button>
+            </form>
+            <% } %>
         </section>
       </main>
       <!-- FOOTER -->

@@ -339,5 +339,16 @@
     "dateOfBirth": "2004-06-18",
     "rol": "admin",
     "avatar": "avatar-1748756319359.jpg"
+  },
+  {
+    "id": "9b8731d5-48d6-4b70-a696-d6587c5dfa59",
+    "email": "godoyiramain@gmail.com",
+    "usuario": "pancho",
+    "password": "$2b$10$jtRd.602L2CxheoGva.dzOZy3JFkFjK05v58gzepT7UCnc3HKFGzK",
+    "firstName": "mati",
+    "lastName": "godoy",
+    "dateOfBirth": "2004-06-18",
+    "rol": "cliente",
+    "avatar": "avatar-1748808670535.jpg"
   }
 ]

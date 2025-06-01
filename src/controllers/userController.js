@@ -38,9 +38,9 @@ const userController = {
         };
 
         users.push(newUser);
-        saveUsers(users);
+        userController.saveUsers(users);
 
-        res.redirect('users/login');
+        res.redirect('/login');
     },
     login: (req, res) => {
         const users = userController.getUsers();
