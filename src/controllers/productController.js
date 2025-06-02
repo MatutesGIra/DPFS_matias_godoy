@@ -1,96 +1,117 @@
-const fileSystem = require("fs");
+const db = require('../../database/models');
 const path = require('path');
-const productFile = path.join(__dirname, '../data/products.json');
-
-
-const getProducts = () => {
-    let products = fileSystem.readFileSync(productFile, "utf-8");
-    return JSON.parse(products);
-};
-const saveProducts = (products) => {
-    fileSystem.writeFileSync(productFile, JSON.stringify(products, null, " "));
-};
+const { validationResult } = require('express-validator')
 
 const productController = {
     viewCart: (req, res) => {
         res.render("products/cart", {title: "Carrito", reqPath: req.path});
     },
-    viewProducts: (req, res) => {
-        const products = getProducts();
-        res.render('products/index', {title: "Productos", products, reqPath: req.path });
+    viewProducts: async (req, res) => {
+        try {
+            const products = await db.Product.findAll(); // Usamos db.Product
+            res.render('products/index', {title: "Productos", products, reqPath: req.path });
+        } catch (error) {
+            console.error("Error al obtener los productos:", error);
+            res.status(500).send("Error al cargar los productos");
+        }
     },
-    detailProducts: (req, res) => {
-        const products = getProducts();
-        const productId = parseInt(req.params.id, 10);
-        const product = products.find(p => p.id === productId);
-
-        if (product) {
-            res.render('products/productDetail', {title: "Detalles de producto", product, reqPath: req.path });
-        } else {
-            res.status(404).send('Producto no encontrado');
+    detailProducts: async (req, res) => {
+        try {
+            const productId = req.params.id;
+            const product = await db.Product.findByPk(productId);
+            if (product) {
+                console.log("Producto obtenido de la base de datos:", product);
+                res.render('products/productDetail', { title: "Detalle del Producto", product });
+            } else {
+                res.status(404).send('Producto no encontrado');
+            }
+        } catch (error) {
+            console.error("Error al obtener detalle del producto:", error);
+            res.status(500).send("Error al obtener detalle del producto");
         }
     },
     createForm: (req, res) => {
         res.render("products/productCreate", {title: "Formulario de edicion", reqPath: req.path});
     },
-    create: (req, res) => {
-        const products = getProducts();
-
-        const newProduct = {
-            id: (products.length) + 1,
-            name: req.body.name,
-            description: req.body.description,
-            image: req.body.image || ' ',
-            category: req.body.category,
-            status: req.body.status,
-            price: parseFloat(req.body.price)
-        };
-
-        products.push(newProduct);
-        saveProducts(products);
-        res.redirect('/products');
-    },
-    editForm: (req, res) => {
-        const products = getProducts();
-        const productId = parseInt(req.params.id, 10);
-        const product = products.find(p => p.id === productId);
-
-        if (product) {
-            res.render('products/productEdit', {title: "Formulario de edicion", product, reqPath: req.path });
-        } else {
-            res.status(404).send('Producto no encontrado para editar');
+    create: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.log("Errores de validación:", errors.array());
+            try {
+                const productId = req.params.id;
+                const product = await db.Product.findByPk(productId);
+                return res.render('products/productEdit', {
+                    errors: errors.array(),
+                    product: product,
+                    title: "Formulario de edicion",
+                    reqPath: req.path
+                });
+            } catch (error) {
+                console.error("Error al obtener el producto para editar:", error);
+                return res.status(500).send("Error al obtener el producto para editar");
+            }
+        }
+        try {
+            const productId = req.params.id;
+            const updatedProduct = await db.Product.update({
+                name: req.body.name,
+                description: req.body.description,
+                image: req.file ? '/images/products/' + req.file.filename : req.body.oldImage,
+                category: req.body.category,
+                status: req.body.status,
+                price: parseFloat(req.body.price)
+            }, {
+                where: { id: productId }
+            });
+            console.log("Producto actualizado:", updatedProduct);
+            res.redirect(`/products/${productId}`);
+        } catch (error) {
+            console.error("Error al actualizar producto:", error);
+            res.status(500).send("Error al actualizar producto");
         }
     },
-    edit: (req, res) => {
-        let products = getProducts();
-        const productId = parseInt(req.params.id, 10);
+    editForm: async (req, res) => {
+        try {
+            const productId = req.params.id;
+            const product = await db.Product.findByPk(productId);
 
-        products = products.map(p => {
-            if (p.id === productId) {
-                return {
-                    ...p,
-                    name: req.body.name,
-                    description: req.body.description,
-                    image: req.body.image || p.image,
-                    category: req.body.category,
-                    status: req.body.status,
-                    price: parseFloat(req.body.price)
-                };
+            if (product) {
+                res.render('products/productEdit', {title: "Formulario de edicion", product, reqPath: req.path });
+            } else {
+                res.status(404).send('Producto no encontrado para editar');
             }
-            return p;
-        });
-
-        saveProducts(products);
-        res.redirect(`/products/${productId}`);
+        } catch (error) {
+            console.error("Error al obtener el producto para editar:", error);
+            res.status(500).send("Error al obtener el producto para editar");
+        }
     },
-    destroy: (req, res) => {
-        let products = getProducts();
-        const productId = parseInt(req.params.id, 10);
+    edit: async (req, res) => {
+        try {
+            const productId = req.params.id;
+            const updatedProduct = await db.Product.update({
+                image: req.file ? '/images/products/' + req.file.filename : req.body.oldImage,
+            }, {
+                where: { id: productId }
+            });
+            console.log("Producto actualizado:", updatedProduct);
+            res.redirect(`/products/${productId}`);
+        } catch (error) {
+            console.error("Error al actualizar producto:", error);
+            res.status(500).send("Error al actualizar producto");
+        }
+    },
+    destroy: async (req, res) => {
+        try {
+            const productId = req.params.id;
+            await db.Product.destroy({ 
+                where: { id: productId }
+            });
 
-        products = products.filter(p => p.id !== productId);
-
-        saveProducts(products);
-        res.redirect('/products');
+            res.redirect('/products');
+        } catch (error) {
+            console.error("Error al eliminar el producto:", error);
+            res.status(500).send("Error al eliminar el producto");
+        }
     }
 };
 module.exports = productController;

@@ -13,7 +13,7 @@
             <%= product.name %>
           </h2>
           <div class="img-container">
-            <img src="<%= product.image %>" alt="<%= product.name %>">
+            <% console.log("Ruta de la imagen:", product.image); %><img src="<%= product.image %>" alt="<%= product.name %>">
           </div>
           <div>
             <h3>
@@ -35,7 +35,7 @@
           <h4>efectivo</h4>
         </section>
         <section>
-          <% if (locals.user && locals.user.rol === 'admin') { %>
+          <% if (locals.user && locals.user.role === 'admin') { %>
             <div class="enviar">
                 <a href="/products/<%= product.id %>/edit">Editar</a>
             </div>

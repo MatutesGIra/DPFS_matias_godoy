@@ -8,36 +8,42 @@
     <!-- MAIN -->
     <main>
         <section id="formulario">
-            <form action="/users/register" method="POST" enctype="multipart/form-data">
+            <form action="/users/register" method="POST" enctype="multipart/form-data" id="registerForm">
                 <h3>Registro</h3>
                 <div>
                     <label for="mail">Email:</label>
                     <input type="email" name="email" id="mail" required>
+                    <small class="error-message" id="emailError"></small>
                 </div>
 
                 <div>
                     <label for="usu">Usuario:</label>
                     <input type="text" name="usuario" id="usu" required>
+                    <small class="error-message" id="usuarioError"></small>
                 </div>
 
                 <div>
                     <label for="pass">Contraseña:</label>
                     <input type="password" name="password" id="pass" required>
+                    <small class="error-message" id="passwordError"></small>
                 </div>
 
                 <div>
                     <label for="name">Nombre:</label>
                     <input type="text" name="firstName" id="name" required>
+                    <small class="error-message" id="firstNameError"></small>
                 </div>
 
                 <div>
                     <label for="ape">Apellido:</label>
                     <input type="text" name="lastName" id="ape" required>
+                    <small class="error-message" id="lastNameError"></small>
                 </div>
 
                 <div>
                     <label for="birthdate">Fecha de nacimiento:</label>
                     <input type="date" name="dateOfBirth" id="birthdate" required>
+                    <small class="error-message" id="birthdateError"></small>
                 </div>
 
                 <div>
@@ -46,11 +52,13 @@
                         <option value="admin">admin</option>
                         <option value="cliente">cliente</option>
                     </select>
+                    <small class="error-message" id="rolError"></small>
                 </div>
 
                 <div>
                     <label for="avatar">Imagen de perfil:</label>
                     <input type="file" name="avatar" id="avatar" accept="image/*">
+                    <small class="error-message" id="avatarError"></small>
                 </div>
 
                 <div>
@@ -59,6 +67,78 @@
             </form>
         </section>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registerForm');
+
+            form.addEventListener('submit', function (event) {
+                let isValid = true;
+
+                // Limpiar mensajes de error
+                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+                // Validar Nombre
+                const firstName = document.getElementById('name').value.trim();
+                if (!firstName) {
+                    document.getElementById('firstNameError').textContent = 'El nombre es obligatorio.';
+                    isValid = false;
+                } else if (firstName.length < 2) {
+                    document.getElementById('firstNameError').textContent = 'El nombre debe tener al menos 2 caracteres.';
+                    isValid = false;
+                }
+
+                // Validar Apellido
+                const lastName = document.getElementById('ape').value.trim();
+                if (!lastName) {
+                    document.getElementById('lastNameError').textContent = 'El apellido es obligatorio.';
+                    isValid = false;
+                } else if (lastName.length < 2) {
+                    document.getElementById('lastNameError').textContent = 'El apellido debe tener al menos 2 caracteres.';
+                    isValid = false;
+                }
+
+                // Validar Email
+                const email = document.getElementById('mail').value.trim();
+                if (!email) {
+                    document.getElementById('emailError').textContent = 'El email es obligatorio.';
+                    isValid = false;
+                } else if (!isValidEmail(email)) {
+                    document.getElementById('emailError').textContent = 'Debes ingresar un formato de email válido.';
+                    isValid = false;
+                }
+
+                // Validar Contraseña
+                const password = document.getElementById('pass').value.trim();
+                if (!password) {
+                    document.getElementById('passwordError').textContent = 'La contraseña es obligatoria.';
+                    isValid = false;
+                } else if (password.length < 8) {
+                    document.getElementById('passwordError').textContent = 'La contraseña debe tener al menos 8 caracteres.';
+                    isValid = false;
+                }
+
+                // Validar Imagen (solo tipo, multer lo valida mejor en el back)
+                const avatar = document.getElementById('avatar').files[0];
+                if (avatar) {
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                    if (!allowedTypes.includes(avatar.type)) {
+                        document.getElementById('avatarError').textContent = 'Debes seleccionar un archivo JPG, JPEG, PNG o GIF.';
+                        isValid = false;
+                    }
+                }
+
+                if (!isValid) {
+                    event.preventDefault(); // Evitar que se envíe el formulario si hay errores
+                }
+            });
+
+            function isValidEmail(email) {
+                // Una forma sencilla de validar el formato del email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+        });
+    </script>
 </body>
 
 </html>

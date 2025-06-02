@@ -8,43 +8,94 @@
 
             <main>
                 <section id="formulario">
-                    <form action="/products/<%= product.id %>?_method=PUT" method="post">
-                        <h3>Editar detalles de producto</h3>
-                        <div>
-                            <label for="nam">Nombre del producto</label>
-                            <input type="text" name="name" id="nam" value="<%= product.name %>">
-                        </div>
-                        <div>
-                            <label for="desc">Descripcion</label>
-                            <input type="text" name="description" id="desc" value="<%= product.description %>">
-                        </div>
-                        <div>
-                            <label for="img">Imagen</label>
-                            <input type="file" name="image" id="img" value="<%= product.image %>">
-                        </div>
-                        <div>
-                            <label for="cate">Categoria</label>
-                            <select name="category" id="cate">
-                                <option value="periferico" <%= product.category === 'periferico' ? 'selected' : '' %>>Periferico</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="est">Estado</label>
-                            <select name="status" id="est">
-                                <option value="nuevo" <%= product.status === 'nuevo' ? 'selected' : '' %>>Nuevo</option>
-                                <option value="usado" <%= product.status === 'usado' ? 'selected' : '' %>>Usado</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="precio">Precio</label>
-                            <input type="number" name="price" id="precio" value="<%= product.price %>">
-                        </div>
-                        <div>
-                            <input type="submit" value="Editar!">
-                        </div>
-                    </form>
-                </section>
-            </main>
+            <form action="/products/<%= product.id %>?_method=PUT " enctype="multipart/form-data" method="post" id="editProductForm">
+                <h3>Editar detalles de producto</h3>
+                <div>
+                    <label for="nam">Nombre del producto</label>
+                    <input type="text" name="name" id="nam" value="<%= product.name %>">
+                    <small class="error-message" id="nameError"></small>
+                </div>
+                <div>
+                    <label for="desc">Descripcion</label>
+                    <input type="text" name="description" id="desc" value="<%= product.description %>">
+                    <small class="error-message" id="descriptionError"></small>
+                </div>
+                <div>
+                    <label for="img">Imagen</label>
+                    <input type="file" name="image" id="img" accept="image/*">
+                    <small class="error-message" id="imageError"></small>
+                    <% if (typeof product !== 'undefined') { %>
+                        <img src="/images/products/<%= product.image %>" alt="Imagen actual" style="max-width: 100px;">
+                    <% } %>
+                </div>
+                <div>
+                    <label for="cate">Categoria</label>
+                    <select name="category" id="cate">
+                        <option value="periferico" <%= product.category === 'periferico' ? 'selected' : '' %>>Periferico</option>
+                    </select>
+                    <small class="error-message" id="categoryError"></small>
+                </div>
+                <div>
+                    <label for="est">Estado</label>
+                    <select name="status" id="est">
+                        <option value="nuevo" <%= product.status === 'nuevo' ? 'selected' : '' %>>Nuevo</option>
+                        <option value="usado" <%= product.status === 'usado' ? 'selected' : '' %>>Usado</option>
+                    </select>
+                    <small class="error-message" id="statusError"></small>
+                </div>
+                <div>
+                    <label for="precio">Precio</label>
+                    <input type="number" name="price" id="precio" value="<%= product.price %>">
+                    <small class="error-message" id="priceError"></small>
+                </div>
+                <div>
+                    <input type="submit" value="Editar!">
+                </div>
+            </form>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('editProductForm');
+
+            form.addEventListener('submit', function (event) {
+                let isValid = true;
+
+                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+                const name = document.getElementById('nam').value.trim();
+                if (!name) {
+                    document.getElementById('nameError').textContent = 'El nombre es obligatorio.';
+                    isValid = false;
+                } else if (name.length < 5) {
+                    document.getElementById('nameError').textContent = 'El nombre debe tener al menos 5 caracteres.';
+                    isValid = false;
+                }
+
+                const description = document.getElementById('desc').value.trim();
+                if (!description) {
+                    document.getElementById('descriptionError').textContent = 'La descripción es obligatoria.';
+                    isValid = false;
+                } else if (description.length < 20) {
+                    document.getElementById('descriptionError').textContent = 'La descripción debe tener al menos 20 caracteres.';
+                    isValid = false;
+                }
+
+                const image = document.getElementById('img').files[0];
+                if (image) {
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                    if (!allowedTypes.includes(image.type)) {
+                        document.getElementById('imageError').textContent = 'Debes seleccionar un archivo JPG, JPEG, PNG o GIF.';
+                        isValid = false;
+                    }
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
     </body>
 
 </html>

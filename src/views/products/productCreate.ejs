@@ -8,44 +8,92 @@
 
             <main>
                 <section id="formulario">
-                    <form action="/products/" method="post">
-                        <h3>Editar detalles de producto</h3>
-                        <div>
-                            <label for="nam">Nombre del producto</label>
-                            <input type="text" name="name" id="nam">
-                        </div>
-                        <div>
-                            <label for="desc">Descripcion</label>
-                            <input type="text" name="description" id="desc" span="3">
-                        </div>
-                        <div>
-                            <label for="img">Imagen</label>
-                            <input type="file" name="image" id="img">
-                        </div>
-                        <div>
-                            <label for="cate">Categoria</label>
-                            <select name="category" id="cate">
-                                <option value="periferico">Periferico</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="est">Categoria</label>
-                            <select name="status" id="est">
-                                <option value="nuevo">Nuevo</option>
-                                <option value="usado">Usado</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="precio">Precio</label>
-                            <input type="number" name="price" id="precio">
-                        </div>
-                        <div>
-                            <input type="submit" value="Crear!">
-                        </div>
-                    </form>
-                </section>
+            <form action="/products/" method="post" enctype="multipart/form-data" id="createProductForm">
+                <h3>Crear detalles de producto</h3>
+                <div>
+                    <label for="nam">Nombre del producto</label>
+                    <input type="text" name="name" id="nam">
+                    <small class="error-message" id="nameError"></small>
+                </div>
+                <div>
+                    <label for="desc">Descripcion</label>
+                    <input type="text" name="description" id="desc" span="3">
+                    <small class="error-message" id="descriptionError"></small>
+                </div>
+                <div>
+                    <label for="img">Imagen</label>
+                    <input type="file" name="image" id="img" accept="image/*">
+                    <small class="error-message" id="imageError"></small>
+                </div>
+                <div>
+                    <label for="cate">Categoria</label>
+                    <select name="category" id="cate">
+                        <option value="periferico">Periferico</option>
+                    </select>
+                    <small class="error-message" id="categoryError"></small>
+                </div>
+                <div>
+                    <label for="est">Estado</label>
+                    <select name="status" id="est">
+                        <option value="nuevo">Nuevo</option>
+                        <option value="usado">Usado</option>
+                    </select>
+                    <small class="error-message" id="statusError"></small>
+                </div>
+                <div>
+                    <label for="precio">Precio</label>
+                    <input type="number" name="price" id="precio" placeholder="999999">
+                    <small class="error-message" id="priceError"></small>
+                </div>
+                <div>
+                    <input type="submit" value="Crear!">
+                </div>
+            </form>
+        </section>
 
-            </main>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('createProductForm');
+
+            form.addEventListener('submit', function (event) {
+                let isValid = true;
+
+                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+                const name = document.getElementById('nam').value.trim();
+                if (!name) {
+                    document.getElementById('nameError').textContent = 'El nombre es obligatorio.';
+                    isValid = false;
+                } else if (name.length < 5) {
+                    document.getElementById('nameError').textContent = 'El nombre debe tener al menos 5 caracteres.';
+                    isValid = false;
+                }
+
+                const description = document.getElementById('desc').value.trim();
+                if (!description) {
+                    document.getElementById('descriptionError').textContent = 'La descripción es obligatoria.';
+                    isValid = false;
+                } else if (description.length < 20) {
+                    document.getElementById('descriptionError').textContent = 'La descripción debe tener al menos 20 caracteres.';
+                    isValid = false;
+                }
+
+                const image = document.getElementById('img').files[0];
+                if (image) {
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                    if (!allowedTypes.includes(image.type)) {
+                        document.getElementById('imageError').textContent = 'Debes seleccionar un archivo JPG, JPEG, PNG o GIF.';
+                        isValid = false;
+                    }
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
     </body>
 
 </html>

@@ -11,29 +11,38 @@
                 <section id="destacados">
                     <section class="art-sect">
                         <h3>Productos</h3>
-                        <% let count = 0; %>
-                        <% products.forEach(p=> {%>
-                            <%if((count % 5) === 0){%>
-                                <section class="articulos">
-                                    <%}%>                               
-                                        <a href="/products/<%= p.id %>"><article class="post">
-                                            <div class="img-container">
-                                                <img src="<%= p.image %>" alt="<%=  p.name  %>">
-                                            </div>
-                                            <div class="descripcion">
-                                                <h4>
-                                                    <%= p.name %>
-                                                </h4>
-                                                <h5>
-                                                    <%= p.price %>
-                                                </h5>
-                                            </div>
-                                        </article></a>
-                                <%count++;%>
-                                <%if ((count % 5) === 0) {%>
-                                </section>
-                                <%}%>
-                        <%}); console.log(count);%>
+                        <% let count=0; %>
+                            <% products.forEach(p=> {%>
+                                <%if((count % 5)===0){%>
+                                    <section class="articulos">
+                                        <%}%>
+                                            <a href="/products/<%= p.id %>">
+                                                <article class="post">
+                                                    <div class="img-container">
+                                                        <img src="<%= p.image %>" alt="<%=  p.name  %>">
+                                                    </div>
+                                                    <div class="descripcion">
+                                                        <h4>
+                                                            <%= p.name %>
+                                                        </h4>
+                                                        <h5>
+                                                            <%= p.price %>
+                                                        </h5>
+                                                    </div>
+                                                </article>
+                                            </a>
+                                            <%count++;%>
+                                                <%if ((count % 5)===0) {%>
+                                    </section>
+                                    <%}%>
+                                        <%}); console.log(count);%>
+                    </section>
+                    <section>
+                        <% if (locals.user && locals.user.role==='admin' ) { %>
+                            <div class="crear-producto">
+                                <a href="/products/create">Crear Nuevo Producto</a>
+                            </div>
+                            <% } %>
                     </section>
                 </section>
             </main>
