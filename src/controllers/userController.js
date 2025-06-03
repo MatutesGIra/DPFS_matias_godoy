@@ -100,6 +100,70 @@ const userController = {
             res.clearCookie('rememberEmail');
             res.redirect('/products');
         });
+    },
+    apiUsers: async (req, res) => {
+        const page = parseInt(req.query.page) || 1;
+        const limit = 10;
+        const offset = (page - 1) * limit;
+
+        try {
+            const { count, rows: users } = await db.User.findAndCountAll({
+                attributes: ['id', 'firstName', 'lastName', 'email'],
+                limit: limit,
+                offset: offset
+            });
+
+            const usersWithDetail = users.map(user => {
+                return {
+                    id: user.id,
+                    name: `${user.firstName} ${user.lastName}`,
+                    email: user.email,
+                    detail: `/api/users/${user.id}`
+                };
+            });
+
+            let next = null;
+            if (offset + limit < count) {
+                next = `/api/users?page=${page + 1}`;
+            }
+
+            let previous = null;
+            if (page > 1) {
+                previous = `/api/users?page=${page - 1}`;
+            }
+
+            const response = {
+                count: count,
+                users: usersWithDetail,
+                next: next,
+                previous: previous
+            };
+
+            res.json(response);
+        } catch (error) {
+            console.error("Error al obtener la lista de usuarios:", error);
+            res.status(500).json({ error: "Error al obtener la lista de usuarios" });
+        }
+    },
+    apiUserDetail: async (req, res) => {
+        try {
+            const user = await db.User.findByPk(req.params.id, {
+                attributes: { exclude: ['password', 'role'] }
+            });
+
+            if (user) {
+                const response = {
+                    ...user.get({ plain: true }),
+                    profileImageUrl: `/images/users/${user.avatar}`
+                };
+                res.json(response);
+            } else {
+                res.status(404).json({ error: "Usuario no encontrado" });
+            }
+        } catch (error) {
+            console.error("Error al obtener el detalle del usuario:", error);
+            res.status(500).json({ error: "Error al obtener el detalle del usuario" });
+        }
     }
 };
 

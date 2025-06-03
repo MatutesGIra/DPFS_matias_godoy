@@ -33,9 +33,9 @@ const authMiddleware = (req, res, next) => {
 };
 
 router.get('/cart', authMiddleware, productController.viewCart);
-
 router.get('/', productController.viewProducts);
-
+router.get('/:id', productController.detailProducts);
+router.get('/:id/edit', authMiddleware, productController.editForm);
 router.get('/create', authMiddleware, [
     body('name')
         .notEmpty().withMessage('El nombre es obligatorio.')
@@ -45,12 +45,8 @@ router.get('/create', authMiddleware, [
         .isLength({ min: 20 }).withMessage('La descripción debe tener al menos 20 caracteres.')
 ], productController.create);
 
+
 router.post('/', authMiddleware, productController.create);
-
-router.get('/:id', productController.detailProducts);
-
-router.get('/:id/edit', authMiddleware, productController.editForm);
-
 router.put('/:id', authMiddleware, upload.single('image'), [
     body('name')
         .notEmpty().withMessage('El nombre es obligatorio.')
@@ -59,7 +55,9 @@ router.put('/:id', authMiddleware, upload.single('image'), [
         .notEmpty().withMessage('La descripción es obligatoria.')
         .isLength({ min: 20 }).withMessage('La descripción debe tener al menos 20 caracteres.')
 ], productController.edit);
-
 router.delete('/:id', authMiddleware, productController.destroy);
+
+router.get('/api/products', productController.apiProducts);
+router.get('/api/products/:id', productController.apiProductDetail);
 
 module.exports = router;

@@ -29,6 +29,9 @@
 - ![#A80874](https://placehold.co/15x15/a80874/a80874.png) `#A80874`
 - ![#0E0F19](https://placehold.co/15x15/0e0f19/0e0f19.png) `#0E0F19`
 
+## Fuentes
+- Sans Serif
+
 ## Tablero
 - [Tablero Trello DPFS](https://trello.com/invite/b/673c88a9d7bb846d15461a64/ATTI7f8e64880cdc5a56d4eb133a41282ba1941747A8/dpfsmatiasgodoy)
 

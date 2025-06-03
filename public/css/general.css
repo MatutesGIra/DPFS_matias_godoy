@@ -2,6 +2,15 @@
     border: 0;
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
+}
+
+:root {
+  --color-gris: #5C5C5C;
+  --color-casi-negro: #060B0E;
+  --color-gris-azulado: #7C93A2;
+  --color-verde: #62D083;
+  --color-rojo: #ED1D46;
 }
 
 nav{

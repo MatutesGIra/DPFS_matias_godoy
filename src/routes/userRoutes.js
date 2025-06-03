@@ -67,4 +67,7 @@ router.post('/login', [
 ], userController.login);
 router.get('/logout', userController.logout);
 
+router.get('/api/users', userController.apiUsers);
+router.get('/api/users/:id', userController.apiUserDetail);
+
 module.exports = router;

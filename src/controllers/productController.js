@@ -112,6 +112,71 @@ const productController = {
             console.error("Error al eliminar el producto:", error);
             res.status(500).send("Error al eliminar el producto");
         }
+    },
+    apiProducts: async (req, res) => {
+        const page = parseInt(req.query.page) || 1;
+        const limit = 10;
+        const offset = (page - 1) * limit;
+
+        try {
+            const { count, rows: products } = await db.Product.findAndCountAll({
+                limit: limit,
+                offset: offset
+            });
+
+            const productsWithDetail = products.map(product => {
+                return {
+                    id: product.id,
+                    name: product.name,
+                    description: product.description,
+                    detail: `/api/products/${product.id}`
+                };
+            });
+
+            let next = null;
+            if (offset + limit < count) {
+                next = `/api/products?page=${page + 1}`;
+            }
+
+            let previous = null;
+            if (page > 1) {
+                previous = `/api/products?page=${page - 1}`;
+            }
+
+            const response = {
+                count: count,
+                products: productsWithDetail,
+                next: next,
+                previous: previous
+            };
+
+            res.json(response);
+        } catch (error) {
+            console.error("Error al obtener la lista de productos:", error);
+            res.status(500).json({ error: "Error al obtener la lista de productos" });
+        }
+    },
+    apiProductDetail: async (req, res) => {
+        try {
+            const product = await db.Product.findByPk(req.params.id);
+
+            if (product) {
+                const response = {
+                    id: product.id,
+                    name: product.name,
+                    description: product.description,
+                    image: `/images/products/${product.image}`,
+                    price: product.price,
+                    active: product.active
+                };
+                res.json(response);
+            } else {
+                res.status(404).json({ error: "Producto no encontrado" });
+            }
+        } catch (error) {
+            console.error("Error al obtener el detalle del producto:", error);
+            res.status(500).json({ error: "Error al obtener el detalle del producto" });
+        }
     }
 };
 module.exports = productController;
