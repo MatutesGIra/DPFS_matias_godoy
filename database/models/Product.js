@@ -1,4 +1,4 @@
-module.exports = function(sequelize,DataTypes){
+module.exports = function(sequelize, DataTypes) {
     let alias = 'Product';
 
     let cols = {
@@ -29,11 +29,20 @@ module.exports = function(sequelize,DataTypes){
     };
 
     let config = {
-    tableName: 'products', // Especifica el nombre de la tabla en la base de datos
-    timestamps: false, // Sequelize añadirá automáticamente los campos createdAt y updatedAt
-    //underscored: true // _ en createdAt y updateAt
+        tableName: 'products',
+        timestamps: false,
     };
 
-const Product = sequelize.define(alias, cols, config)
-return Product;
-}
+    const Product = sequelize.define(alias, cols, config);
+    
+    Product.associate = (models) => {
+        Product.belongsToMany(models.Category, {
+            through: models.ProductCategory,
+            foreignKey: 'product_id',      
+            otherKey: 'category_id',      
+            as: 'categories'             
+        });
+    };
+
+    return Product;
+};

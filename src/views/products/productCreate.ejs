@@ -3,46 +3,55 @@
 
 <%- include('../partials/head.ejs') %>
 
-    <body>
-        <%- include('../partials/nav.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
 
-            <main>
-                <section id="formulario">
+    <main>
+        <section id="formulario">
             <form action="/products/" method="post" enctype="multipart/form-data" id="createProductForm">
                 <h3>Crear detalles de producto</h3>
                 <div>
-                    <label for="nam">Nombre del producto</label>
-                    <input type="text" name="name" id="nam">
+                    <label for="name">Nombre del producto</label>
+                    <input type="text" name="name" id="name">
                     <small class="error-message" id="nameError"></small>
                 </div>
                 <div>
-                    <label for="desc">Descripcion</label>
-                    <input type="text" name="description" id="desc" span="3">
+                    <label for="description">Descripcion</label>
+                    <textarea name="description" id="description"></textarea>
                     <small class="error-message" id="descriptionError"></small>
                 </div>
                 <div>
-                    <label for="img">Imagen</label>
-                    <input type="file" name="image" id="img" accept="image/*">
+                    <label for="image">Imagen</label>
+                    <input type="file" name="image" id="image" accept="image/*">
                     <small class="error-message" id="imageError"></small>
+                    <div id="imagePreviewContainer"></div>
                 </div>
                 <div>
-                    <label for="cate">Categoria</label>
-                    <select name="category" id="cate">
-                        <option value="periferico">Periferico</option>
-                    </select>
+                    <label>Categorías</label><br>
+                    <div class="category-selection">
+                        <% categories.forEach(category=> { %>
+                            <div class="category-item">
+                                <input type="checkbox" name="categoryIds" id="category-<%= category.id %>"
+                                    value="<%= category.id %>" class="category-checkbox">
+                                <label for="category-<%= category.id %>">
+                                    <%= category.name %>
+                                </label>
+                            </div>
+                        <% }); %>
+                    </div>
                     <small class="error-message" id="categoryError"></small>
                 </div>
                 <div>
-                    <label for="est">Estado</label>
-                    <select name="status" id="est">
+                    <label for="status">Estado</label>
+                    <select name="status" id="status">
                         <option value="nuevo">Nuevo</option>
                         <option value="usado">Usado</option>
                     </select>
                     <small class="error-message" id="statusError"></small>
                 </div>
                 <div>
-                    <label for="precio">Precio</label>
-                    <input type="number" name="price" id="precio" placeholder="999999">
+                    <label for="price">Precio</label>
+                    <input type="number" name="price" id="price" placeholder="999999">
                     <small class="error-message" id="priceError"></small>
                 </div>
                 <div>
@@ -50,50 +59,8 @@
                 </div>
             </form>
         </section>
-
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('createProductForm');
-
-            form.addEventListener('submit', function (event) {
-                let isValid = true;
-
-                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-                const name = document.getElementById('nam').value.trim();
-                if (!name) {
-                    document.getElementById('nameError').textContent = 'El nombre es obligatorio.';
-                    isValid = false;
-                } else if (name.length < 5) {
-                    document.getElementById('nameError').textContent = 'El nombre debe tener al menos 5 caracteres.';
-                    isValid = false;
-                }
-
-                const description = document.getElementById('desc').value.trim();
-                if (!description) {
-                    document.getElementById('descriptionError').textContent = 'La descripción es obligatoria.';
-                    isValid = false;
-                } else if (description.length < 20) {
-                    document.getElementById('descriptionError').textContent = 'La descripción debe tener al menos 20 caracteres.';
-                    isValid = false;
-                }
-
-                const image = document.getElementById('img').files[0];
-                if (image) {
-                    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-                    if (!allowedTypes.includes(image.type)) {
-                        document.getElementById('imageError').textContent = 'Debes seleccionar un archivo JPG, JPEG, PNG o GIF.';
-                        isValid = false;
-                    }
-                }
-
-                if (!isValid) {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
-    </body>
+    <script src="/js/createProductVal.js"></script>
+</body>
 
 </html>

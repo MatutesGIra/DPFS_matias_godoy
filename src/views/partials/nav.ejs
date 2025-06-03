@@ -1,6 +1,6 @@
 <nav>
     <div class="icon-container">
-        <a href="/products"><img src="" alt="logo de la pagina"></a>
+        <a href="/products"><img src="/images/design/logo.png" alt="Logo de la página"></a>
     </div>
     <div>
         <input type="search" name="buscar" placeholder="Buscar" id="find">
@@ -11,17 +11,17 @@
             <% console.log('Ruta actual en nav.ejs:', currentPath); %>
             <% if (currentPath === '/profile') { %>
                 <li class="icon-container">
-                    <a href="/products/cart"><img src="/public/images/design/iconos/carro.png" alt="carrito de compras"></a>
+                    <a href="/products/cart"><img src="/images/design/iconos/carro.png" alt="Carrito de compras"></a>
                 </li>
             <% } else { %>
                 <% if (locals.user) { %>
                     <li class="icon-container">
-                        <a href="/products/cart"><img src="/public/images/design/iconos/carro.png" alt="carrito de compras"></a>
+                        <a href="/products/cart"><img src="/images/design/iconos/carro.png" alt="Carrito de compras"></a>
                     </li>
-                    <li class="icon-container"><a href="/users/profile"><img src="/images/users/<%= user.avatar %>" alt="Avatar"></a></li>
+                    <li class="icon-container"><a href="/users/profile"><img src="/images/users/<%= user.avatar %>" alt="Avatar del usuario"></a></li>
                 <% } else { %>
                     <li class="icon-container">
-                    <a href="/products/cart"><img src="/public/images/design/iconos/carro.png" alt="carrito de compras"></a>
+                        <a href="/products/cart"><img src="/images/design/iconos/carro.png" alt="Carrito de compras"></a>
                     </li>
                     <li class="usu">
                         <a href="/users/login">Ingresar</a>

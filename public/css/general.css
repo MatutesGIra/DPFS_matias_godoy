@@ -1,8 +1,9 @@
-*{
+* {
     border: 0;
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+    box-sizing: border-box;
 }
 
 :root {
@@ -13,71 +14,234 @@
   --color-rojo: #ED1D46;
 }
 
-nav{
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    color: var(--color-casi-negro);
+    margin: 0;
+}
+
+nav {
     display: flex;
     flex-direction: row;
-    background-color: #E3B5A4;
+    background-color: var(--color-casi-negro);
     justify-content: space-between;
     align-items: center;
     height: 4rem;
+    padding: 0 1rem;
 }
 
-#find{
+.icon-container:first-child {
+    margin-right: 1rem;
+}
+
+#find {
     width: 14rem;
     height: 2.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-gris);
+    color: white;
+    padding: 0.5rem 1rem;
 }
 
-.personal{
+#find::placeholder {
+    color: #ccc;
+}
+
+.personal {
     display: flex;
-    justify-content: space-between;
-    height: 4rem;
+    align-items: center; 
+    height: 100%; 
+    margin: 0;
+    padding: 0;
 }
 
-.usu{
+.personal li {
     list-style: none;
+    margin-left: 0.5rem;
+    display: flex; 
+    align-items: center;
+}
+
+.icon-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 0.1rem solid brown;
-    border-radius: 20%;
-    margin: auto;
-    padding: 0.3rem;
-    margin-left: 0.3rem;
-    margin-right: 0.3rem;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
-a{
+.icon-container img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.usu {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-gris); 
+    margin: 0;
+    padding: 0;
+    height: auto;
+    display: flex; 
+    align-items: center;
+}
+
+.usu a {
+    display: block;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none; 
+}
+
+.usu a:hover {
+    background-color: #333;
+}
+
+a {
     text-decoration: none;
     color: black;
 }
 
-footer{
+footer {
     background-color: #E3B5A4;
     display: flex;
     flex-direction: row;
 }
 
-.redes{
+.redes {
     display: flex;
     flex-direction: row;
 }
 
-.contact{
+.contact {
     display: flex;
     flex-direction: row;
 }
 
 img {
-    width: 100%;
-}
-
-.icon-container{
-    padding: 0.6rem;
-    list-style: none;
-    width: 50px;
-    height: 50px;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .contact a {
     color: black;
-} 
+}
+
+footer {
+    background-color: #7C93A2;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+    align-items: flex-start;
+}
+
+.footer-left, .footer-middle, .footer-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-left .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-left .logo-container img {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+    background-color: #ddd;
+    padding: 10px;
+}
+
+.footer-left .logo-container p {
+    font-size: 0.9em;
+}
+
+.footer-middle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-middle ul li {
+    margin-bottom: 8px;
+}
+
+.footer-middle ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-middle ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.footer-right .payment-methods {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.footer-right .payment-methods p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.footer-right .payment-methods .payment-icons {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+}
+
+.footer-right .payment-methods .payment-icons .icon-container {
+    width: 30px;
+    height: auto;
+}
+
+.footer-right .payment-methods .payment-icons .icon-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.footer-right .social-icons {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.footer-right .social-icons .icon-container {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #4a65bd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-right .social-icons .icon-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-right .social-icons .icon-container img {
+    max-width: 70%;
+    max-height: 70%;
+}

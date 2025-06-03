@@ -37,45 +37,7 @@
             </div>
         </section>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('loginForm');
-
-            form.addEventListener('submit', function (event) {
-                let isValid = true;
-
-                // Limpiar mensajes de error
-                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-                // Validar Email
-                const email = document.getElementById('email').value.trim();
-                if (!email) {
-                    document.getElementById('emailError').textContent = 'El email es obligatorio.';
-                    isValid = false;
-                } else if (!isValidEmail(email)) {
-                    document.getElementById('emailError').textContent = 'Debes ingresar un formato de email válido.';
-                    isValid = false;
-                }
-
-                // Validar Contraseña
-                const password = document.getElementById('password').value.trim();
-                if (!password) {
-                    document.getElementById('passwordError').textContent = 'La contraseña es obligatoria.';
-                    isValid = false;
-                }
-
-                if (!isValid) {
-                    event.preventDefault(); // Evitar que se envíe el formulario si hay errores
-                }
-            });
-
-            function isValidEmail(email) {
-                // Una forma sencilla de validar el formato del email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
-        });
-    </script>
+    <script src="/js/loginVal.js"></script>
 </body>
 
 </html>

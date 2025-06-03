@@ -23,7 +23,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
 // Recursos estaticos o publicos
-app.use(express.static(path.join(__dirname, 'public')));
+const publicPath = path.join(__dirname, 'public');
+app.use(express.static(publicPath));
+console.log('Sirviendo archivos estáticos desde:', publicPath);
 
 // CookieParser
 app.use(cookieParser());
@@ -52,15 +54,14 @@ const rememberMeMiddleware = async (req, res, next) => {
 
             if (user) {
                 req.session.userId = user.id;
-                console.log('Usuario logueado automáticamente por cookie:', user.username); // Usar username en lugar de usuario
+                console.log('Usuario logueado automáticamente por cookie:', user.username);
             } else {
                 console.log('Usuario de cookie no encontrado.');
-                res.clearCookie('rememberEmail'); // Limpiar cookie si el usuario no existe
+                res.clearCookie('rememberEmail');
             }
         } catch (error) {
             console.error('Error al buscar usuario por email:', error);
-            // Manejar el error apropiadamente (ej. redirigir a una página de error, mostrar un mensaje)
-            return res.redirect('/users/login'); // O alguna otra ruta de manejo de error
+            return res.redirect('/users/login');
         }
     }
 

@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-    <%- include('../partials/head.ejs') %>
-<body>
-    <%- include('../partials/nav.ejs') %>
-    <div class="profile-container">
-        <h1><%= title %></h1>
-        <% if (locals.user) { %>
-            <img src="/images/users/<%= user.avatar %>" alt="Avatar" class="img-container">
-            <p><strong>Usuario:</strong> <%= user.username %></p>
-            <p><strong>Email:</strong> <%= user.email %></p>
-            <p><strong>Nombre:</strong> <%= user.firstName %> <%= user.lastName %></p>
-            <p><strong>Fecha de Nacimiento:</strong> <%= user.dateOfBirth %></p>
-            <p><strong>Rol:</strong> <%= user.role %></p>
-            <a href="/users/logout">Cerrar Sesión</a>
-        <% } %>
-    </div>
-</body>
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <%- include('../partials/nav.ejs') %>
+            <main>
+                <div class="profile-container">
+                    <h2>Mi Perfil</h2>
+                    <% if (locals.user) { %>
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                <% if (user && user.avatar) { %>
+                                    <img src="/images/users/<%= user.avatar %>" alt="Avatar de <%= user.username %>">
+                                    <% } else { %>
+                                        <img src="/images/users/default-avatar.png" alt="Avatar predeterminado">
+                                        <% } %>
+                            </div>
+                            <div class="user-details">
+                                <h3>¡Hola, <%= user.firstName %>
+                                        <%= user.lastName %>!</h3>
+                                <p><strong>Usuario:</strong>
+                                    <%= user.username %>
+                                </p>
+                                <p><strong>Email:</strong>
+                                    <%= user.email %>
+                                </p>
+                                <p><strong>Fecha de Nacimiento:</strong>
+                                    <% if (user.dateOfBirth) { %>
+                                        <%= new Date(user.dateOfBirth).toLocaleDateString('es-AR') %>
+                                            <% } else { %>
+                                                No especificada
+                                                <% } %>
+                                </p>
+                                <% if (user.role) { %>
+                                    <p><strong>Rol:</strong>
+                                        <%= user.role %>
+                                    </p>
+                                    <% } %>
+                            </div>
+                        </div>
+
+                        <div class="profile-actions">
+                            <a href="/users/edit/<%= user.id %>" class="edit-button">Editar Perfil</a>
+                            <a href="/users/logout" class="logout-button">Cerrar Sesión</a>
+                        </div>
+                        <% } else { %>
+                            <p>No se pudo cargar la información del perfil. Por favor, <a href="/users/login">inicia
+                                    sesión</a>.</p>
+                            <% } %>
+                </div>
+            </main>
+    </body>
+
 </html>

@@ -8,43 +8,45 @@
     <%- include('../partials/nav.ejs') %>
       <!-- MAIN -->
       <main>
-        <section>
-          <h2>
-            <%= product.name %>
-          </h2>
-          <div class="img-container">
-            <% console.log("Ruta de la imagen:", product.image); %><img src="<%= product.image %>" alt="<%= product.name %>">
-          </div>
-          <div>
-            <h3>
-              <%= product.price %>
-            </h3>
-            <button type="submit" href="./cart.html">Agregar al carrito</button>
-          </div>
-        </section>
-        <section>
-          <h3>Detalle del producto</h3>
-          <p>Estado: <%= product.status %>
-          </p>
-          <p>Descripcion: <%= product.description %>
-          </p>
-        </section>
-        <section>
-          <h3>Metodos de pago</h3>
-          <h4>tarjeta</h4>
-          <h4>efectivo</h4>
-        </section>
-        <section>
-          <% if (locals.user && locals.user.role === 'admin') { %>
-            <div class="enviar">
-                <a href="/products/<%= product.id %>/edit">Editar</a>
+        <div class="product-container">
+          <section class="product-info">
+            <h2>
+              <%= product.name %>
+            </h2>
+            <div class="img-container">
+              <img src="<%= product.image ? (product.image.startsWith('http://') || product.image.startsWith('https://') ? product.image : '/images/products/' + product.image) : '/images/no-image.png' %>" alt="<%= product.name %>">
             </div>
-            <form action="/products/<%= product.id %>?_method=DELETE" method="post">
+            <div class="product-price">
+              <h3>
+                <%= product.price %>
+              </h3>
+              <form action="/products/add/<%= product.id %>" method="post">
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                <button type="submit">Agregar al carrito</button>
+              </form>
+            </div>
+          </section>
+
+          <section class="product-details">
+            <h3>Detalle del producto</h3>
+            <p>Estado: <%= product.status %> - <%= product.isUsed ? 'Usado' : 'Nuevo' %>
+            </p>
+            <p>
+              <%= product.description %>
+            </p>
+          </section>
+
+          <% if (locals.user && locals.user.role==='admin' ) { %>
+            <section class="admin-actions">
+              <a href="/products/<%= product.id %>/edit">Editar</a>
+              <form action="/products/<%= product.id %>?_method=DELETE" method="post" class="delete-form">
                 <button type="submit"
-                    onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')" class="enviar">Eliminar</button>
-            </form>
+                  onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')">Eliminar</button>
+              </form>
+            </section>
             <% } %>
-        </section>
+        </div>
       </main>
       <!-- FOOTER -->
       <%- include('../partials/footer.ejs') %>

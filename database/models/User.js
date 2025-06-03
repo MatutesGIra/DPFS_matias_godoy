@@ -1,5 +1,5 @@
 module.exports = function(sequelize,DataTypes){
-    let alias = 'User'; // Puedes usar 'User' o el nombre que prefieras para referirte al modelo
+    let alias = 'User';
 
     let cols = {
         id: {
@@ -40,8 +40,8 @@ module.exports = function(sequelize,DataTypes){
     };
 
     let config = {
-        tableName: 'users', // Nombre de la tabla en la base de datos
-        timestamps: false // Si tienes createdAt y updatedAt
+        tableName: 'users', 
+        timestamps: false 
     };
 
 const User = sequelize.define(alias, cols, config)

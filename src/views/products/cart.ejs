@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <%- include('../partials/head.ejs') %>
-
 <body>
-    <!-- NAV -->
     <%- include('../partials/nav.ejs') %>
-    <!-- MAIN -->
-    <main>
+    <main class="cart-main">
         <h1>Carrito de compras</h1>
-        <section>
-            <article class="post">
-                <img src="./images/products/Funda Para Notebook Gadnic.jpg" alt="Funda Estuche Para Notebook Gadnic 14 Pulgadas Color Negro">
-                <div>
-                    <h3>Funda Estuche Para Notebook Gadnic 14 Pulgadas Color Negro</h3>
-                    <h4>$13.999</h4>
-                    <label for="cant">Cantidad</label>
-                    <input type="number" name="cant" id="cant" min="1" max="5">
-                    <button type="submit">Quitar del carrito</button>
-                </div>
-            </article>
+        <section class="cart-items-section">
+            <% if (cartItems && cartItems.length > 0) { %>
+                <% cartItems.forEach(product => { %>
+                    <article class="cart-item-card">
+                        <img src="/images/products/<%= product.image %>" alt="<%= product.name %>">
+                        <div class="item-details">
+                            <h3><%= product.name %></h3>
+                            <h4>$<%= product.price.toFixed(2) %></h4>
+                            <div class="quantity-control">
+                                <label for="quantity-<%= product.id %>">Cantidad:</label>
+                                <input
+                                    type="number"
+                                    name="quantity"
+                                    id="quantity-<%= product.id %>"
+                                    min="1"
+                                    value="<%= product.quantity %>"
+                                    data-product-id="<%= product.id %>"
+                                    class="item-quantity-input"
+                                >
+                                <button type="button" class="remove-item-button" data-product-id="<%= product.id %>">
+                                    Quitar del carrito
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                <% }); %>
+            <% } else { %>
+                <p class="empty-cart-message">Tu carrito está vacío. ¡Agrega algunos productos!</p>
+            <% } %>
         </section>
-        <section>
-            <div>
-                <h3>$13.999</h3>
+
+        <section class="cart-summary-section">
+            <div class="cart-total">
+                <h3>Total: $<%= total %></h3>
             </div>
-            <div>
+            <div class="payment-methods-info">
                 <h3>Formas de Pago</h3>
-                <h2>Tarjeta</h2>
-                <h2>Efectivo</h2>
+                <p><h2>Tarjeta de Crédito/Débito</h2></p>
+                <p><h2>Efectivo</h2></p>
             </div>
-            <div>
-                <input type="submit" value="Comprar">
+            <div class="checkout-button-container">
+                <button type="button" class="checkout-button">Comprar</button>
             </div>
         </section>
     </main>
-    <!-- FOOTER -->
+    <script src="/js/cartVal.js"></script>
     <%- include('../partials/footer.ejs') %>
 </body>
-
 </html>

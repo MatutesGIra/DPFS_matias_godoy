@@ -3,49 +3,63 @@
 
 <%- include('../partials/head.ejs') %>
 
-    <body>
-        <%- include('../partials/nav.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
 
-            <main>
-                <section id="formulario">
-            <form action="/products/<%= product.id %>?_method=PUT " enctype="multipart/form-data" method="post" id="editProductForm">
+    <main>
+        <section id="formulario">
+            <form action="/products/<%= product.id %>?_method=PUT " enctype="multipart/form-data" method="post"
+                id="createProductForm">
                 <h3>Editar detalles de producto</h3>
                 <div>
-                    <label for="nam">Nombre del producto</label>
-                    <input type="text" name="name" id="nam" value="<%= product.name %>">
+                    <label for="name">Nombre del producto</label>
+                    <input type="text" name="name" id="name" value="<%= product.name %>">
                     <small class="error-message" id="nameError"></small>
                 </div>
                 <div>
-                    <label for="desc">Descripcion</label>
-                    <input type="text" name="description" id="desc" value="<%= product.description %>">
+                    <label for="description">Descripcion</label>
+                    <input type="text" name="description" id="description" value="<%= product.description %>">
                     <small class="error-message" id="descriptionError"></small>
                 </div>
                 <div>
-                    <label for="img">Imagen</label>
-                    <input type="file" name="image" id="img" accept="image/*">
+                    <label for="image">Imagen</label>
+                    <input type="file" name="image" id="image" accept="image/*">
                     <small class="error-message" id="imageError"></small>
-                    <% if (typeof product !== 'undefined') { %>
-                        <img src="/images/products/<%= product.image %>" alt="Imagen actual" style="max-width: 100px;">
-                    <% } %>
+                    <div id="imagePreviewContainer">
+                        <% if (product.image) { %>
+                            <img src="/images/products/<%= product.image %>" alt="Imagen actual del producto"
+                                style="max-width: 150px; max-height: 150px; margin-top: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <% } %>
+                    </div>
                 </div>
                 <div>
-                    <label for="cate">Categoria</label>
-                    <select name="category" id="cate">
-                        <option value="periferico" <%= product.category === 'periferico' ? 'selected' : '' %>>Periferico</option>
-                    </select>
+                    <label>Categorías</label><br>
+                    <div class="category-selection">
+                        <% categories.forEach(category=> { %>
+                            <div class="category-item">
+                                <input type="checkbox" name="categoryIds" id="category-<%= category.id %>"
+                                    value="<%= category.id %>" class="category-checkbox"
+                                    <% if (typeof product !== 'undefined' && product.categories && product.categories.some(prodCat=> prodCat.id === category.id)) { %> checked <% } %>
+                                >
+                                <label for="category-<%= category.id %>">
+                                    <%= category.name %>
+                                </label>
+                            </div>
+                        <% }); %>
+                    </div>
                     <small class="error-message" id="categoryError"></small>
                 </div>
                 <div>
-                    <label for="est">Estado</label>
-                    <select name="status" id="est">
-                        <option value="nuevo" <%= product.status === 'nuevo' ? 'selected' : '' %>>Nuevo</option>
-                        <option value="usado" <%= product.status === 'usado' ? 'selected' : '' %>>Usado</option>
+                    <label for="status">Estado</label>
+                    <select name="status" id="status">
+                        <option value="nuevo" <%=product.status==='nuevo' ? 'selected' : '' %>>Nuevo</option>
+                        <option value="usado" <%=product.status==='usado' ? 'selected' : '' %>>Usado</option>
                     </select>
                     <small class="error-message" id="statusError"></small>
                 </div>
                 <div>
-                    <label for="precio">Precio</label>
-                    <input type="number" name="price" id="precio" value="<%= product.price %>">
+                    <label for="price">Precio</label>
+                    <input type="number" name="price" id="price" value="<%= product.price %>">
                     <small class="error-message" id="priceError"></small>
                 </div>
                 <div>
@@ -54,48 +68,7 @@
             </form>
         </section>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('editProductForm');
-
-            form.addEventListener('submit', function (event) {
-                let isValid = true;
-
-                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-                const name = document.getElementById('nam').value.trim();
-                if (!name) {
-                    document.getElementById('nameError').textContent = 'El nombre es obligatorio.';
-                    isValid = false;
-                } else if (name.length < 5) {
-                    document.getElementById('nameError').textContent = 'El nombre debe tener al menos 5 caracteres.';
-                    isValid = false;
-                }
-
-                const description = document.getElementById('desc').value.trim();
-                if (!description) {
-                    document.getElementById('descriptionError').textContent = 'La descripción es obligatoria.';
-                    isValid = false;
-                } else if (description.length < 20) {
-                    document.getElementById('descriptionError').textContent = 'La descripción debe tener al menos 20 caracteres.';
-                    isValid = false;
-                }
-
-                const image = document.getElementById('img').files[0];
-                if (image) {
-                    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-                    if (!allowedTypes.includes(image.type)) {
-                        document.getElementById('imageError').textContent = 'Debes seleccionar un archivo JPG, JPEG, PNG o GIF.';
-                        isValid = false;
-                    }
-                }
-
-                if (!isValid) {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
-    </body>
+    <script src="/js/createProductVal.js"></script>
+</body>
 
 </html>

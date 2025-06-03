@@ -2,50 +2,44 @@
 <html lang="en">
 
 <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/index.css">
 
     <body>
-        <!-- NAV -->
         <%- include('../partials/nav.ejs') %>
-            <!-- MAIN -->
+
             <main>
-                <section id="destacados">
-                    <section class="art-sect">
-                        <h3>Productos</h3>
-                        <% let count=0; %>
-                            <% products.forEach(p=> {%>
-                                <%if((count % 5)===0){%>
-                                    <section class="articulos">
-                                        <%}%>
-                                            <a href="/products/<%= p.id %>">
-                                                <article class="post">
-                                                    <div class="img-container">
-                                                        <img src="<%= p.image %>" alt="<%=  p.name  %>">
-                                                    </div>
-                                                    <div class="descripcion">
-                                                        <h4>
-                                                            <%= p.name %>
-                                                        </h4>
-                                                        <h5>
-                                                            <%= p.price %>
-                                                        </h5>
-                                                    </div>
-                                                </article>
-                                            </a>
-                                            <%count++;%>
-                                                <%if ((count % 5)===0) {%>
-                                    </section>
-                                    <%}%>
-                                        <%}); console.log(count);%>
-                    </section>
-                    <section>
-                        <% if (locals.user && locals.user.role==='admin' ) { %>
-                            <div class="crear-producto">
-                                <a href="/products/create">Crear Nuevo Producto</a>
-                            </div>
-                            <% } %>
-                    </section>
+                <section id="productos-grid">
+                    <h2>Productos</h2>
+                    <div class="grid-container">
+                        <% products.forEach(p=> { %>
+                            <a href="/products/<%= p.id %>" class="product-link">
+                                <article class="product-card">
+                                    <div class="img-container">
+                                        <img src="<%= p.image ? (p.image.startsWith('http://') || p.image.startsWith('https://') ? p.image : '/images/products/' + p.image) : '/images/no-image.png' %>" alt="<%= p.name %>">
+                                    </div>
+                                    <div class="descripcion">
+                                        <h4>
+                                            <%= p.name %>
+                                        </h4>
+                                        <h5>
+                                            <%= p.price %>
+                                        </h5>
+                                    </div>
+                                </article>
+                            </a>
+                            <% }); %>
+                    </div>
+                </section>
+                <section>
+                    <% if (locals.user && locals.user.role==='admin' ) { %>
+                        <div class="crear-producto">
+                            <a href="/products/create">Crear Nuevo Producto</a>
+                        </div>
+                        <% } %>
+                </section>
                 </section>
             </main>
+
             <%- include('../partials/footer.ejs') %>
     </body>
 
