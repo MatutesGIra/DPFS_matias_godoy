@@ -43,7 +43,6 @@ router.get('/profile', authMiddleware, userController.getProfile);
 
 
 router.post('/register', upload.single('avatar'), [
-    
     body('firstName')
         .notEmpty().withMessage('El nombre es obligatorio.')
         .isLength({ min: 2 }).withMessage('El nombre debe tener al menos 2 caracteres.'),
@@ -80,7 +79,7 @@ router.post('/register', upload.single('avatar'), [
         .notEmpty().withMessage('La contraseña es obligatoria.')
         .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.')
         // Incluí el guion bajo '_' en los caracteres especiales permitidos pero aun no lo acepta
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$/)
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
         .withMessage('La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial (ej. @$!%*?&_).'),
 
     body('confirm_password')

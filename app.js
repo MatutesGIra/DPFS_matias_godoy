@@ -40,10 +40,6 @@ app.use(session({
 
 // Middleware
 const rememberMeMiddleware = async (req, res, next) => {
-    console.log('--- rememberMeMiddleware INICIO ---');
-    console.log('req.cookies.rememberEmail:', req.cookies.rememberEmail);
-    console.log('req.session.userId:', req.session.userId);
-
     if (req.cookies.rememberEmail && !req.session.userId) {
         console.log('Cookie rememberEmail encontrada y no hay sesión activa.');
 
@@ -64,15 +60,11 @@ const rememberMeMiddleware = async (req, res, next) => {
             return res.redirect('/users/login');
         }
     }
-
-    console.log('--- rememberMeMiddleware FIN ---');
     next();
 };
 
 // Adjuntar el usuario a res.locals
 const userMiddleware = async (req, res, next) => { 
-    console.log('--- userMiddleware INICIO ---');
-    console.log('req.session.userId en userMiddleware:', req.session.userId);
     if (req.session.userId) {
         try {
             const loggedUser = await db.User.findByPk(req.session.userId);
@@ -92,9 +84,7 @@ const userMiddleware = async (req, res, next) => {
         }
     } else {
         res.locals.user = null;
-        console.log('No hay usuario en sesión.');
     }
-    console.log('--- userMiddleware FIN ---');
     next();
 };
 

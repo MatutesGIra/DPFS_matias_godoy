@@ -29,11 +29,10 @@ const userController = {
             cartItemCount: productController.getCartItemCount(req)
         });
     },
-
     register: async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.render('users/register', {
+            return res.render('/users/register', {
                 errors: errors.array(),
                 oldData: req.body,
                 title: "Formulario de registro",
@@ -49,7 +48,7 @@ const userController = {
 
             const newUser = {
                 email: req.body.email,
-                username: req.body.usuario,
+                username: req.body.username,
                 password: bcrypt.hashSync(req.body.password, 10),
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -68,7 +67,7 @@ const userController = {
             console.error("Error al registrar el usuario:", error);
             
             const cartItemCount = productController.getCartItemCount(req);
-            res.render('users/register', {
+            res.render('/users/register', {
                 errors: [{ msg: 'Hubo un error al intentar registrar el usuario. Por favor, inténtalo de nuevo.' }],
                 oldData: req.body,
                 title: "Formulario de registro",
@@ -79,62 +78,76 @@ const userController = {
         }
     },
     login: async (req, res) => {
+        console.log("LOGIN DEBUG: Request entered login controller function.");
+        console.log("LOGIN DEBUG: req.body:", req.body); // Añadido para ver los datos del formulario
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            console.log("Errores de validación:", errors.array());
+            console.log("LOGIN DEBUG: Errores de validación de express-validator:", errors.array());
             const cartItemCount = productController.getCartItemCount(req); 
             return res.render('users/login', {
                 errors: errors.array(),
                 oldData: req.body,
                 title: "Formulario de ingreso",
+                style: "login",
                 reqPath: req.path,
                 cartItemCount 
             });
         }
 
         try {
+            console.log("LOGIN DEBUG: Buscando usuario con email:", req.body.email);
             const userToLogin = await db.User.findOne({ where: { email: req.body.email } });
+            console.log("LOGIN DEBUG: Resultado de userToLogin:", userToLogin ? userToLogin.get({ plain: true }) : null); // Muestra el usuario encontrado o null
 
             if (!userToLogin) {
+                console.log("LOGIN DEBUG: Usuario NO encontrado en la base de datos.");
                 const cartItemCount = productController.getCartItemCount(req);
                 return res.render('users/login', {
                     errors: [{ msg: 'Credenciales inválidas.' }],
                     oldData: req.body,
                     title: "Formulario de ingreso",
+                    style: "login",
                     reqPath: req.path,
                     cartItemCount 
                 });
             }
 
+            console.log("LOGIN DEBUG: Comparando contraseña para usuario:", userToLogin.username);
             const passwordMatch = bcrypt.compareSync(req.body.password, userToLogin.password);
+            console.log("LOGIN DEBUG: Resultado de passwordMatch:", passwordMatch);
 
             if (!passwordMatch) {
+                console.log("LOGIN DEBUG: Contraseña NO coincide.");
                 const cartItemCount = productController.getCartItemCount(req);
                 return res.render('users/login', {
                     errors: [{ msg: 'Credenciales inválidas.' }],
                     oldData: req.body,
                     title: "Formulario de ingreso",
+                    style: "login",
                     reqPath: req.path,
                     cartItemCount 
                 });
             }
 
             req.session.userId = userToLogin.id;
-            console.log("Usuario logueado:", userToLogin.username);
+            console.log("LOGIN DEBUG: Usuario logueado exitosamente. ID de sesión:", req.session.userId);
 
-            if (req.body.rememberMe) {
+            if (req.body.rememberme) { 
                 res.cookie('rememberEmail', userToLogin.email, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
-                console.log("Cookie 'rememberEmail' establecida.");
+                console.log("LOGIN DEBUG: Cookie 'rememberEmail' establecida.");
             }
 
-            res.redirect('/users/profile');
+            console.log("LOGIN DEBUG: Redirigiendo a /users/profile");
+            res.redirect('/users/profile'); 
         } catch (error) {
-            console.error("Error al intentar iniciar sesión:", error);
+            console.error("LOGIN DEBUG: Error al intentar iniciar sesión:", error);
             const cartItemCount = productController.getCartItemCount(req); 
             res.render('users/login', {
                 errors: [{ msg: 'Hubo un error al intentar iniciar sesión. Por favor, inténtalo de nuevo.' }],
                 oldData: req.body,
                 title: "Formulario de ingreso",
+                style: "login",
                 reqPath: req.path,
                 cartItemCount 
             });
@@ -159,7 +172,7 @@ const userController = {
             const offset = (page - 1) * limit;
 
             const { count, rows: users } = await db.User.findAndCountAll({
-                attributes: ['id', 'username', 'email', 'avatar'], // Incluye avatar para la URL de la imagen
+                attributes: ['id', 'username', 'email', 'avatar'],
                 limit: limit,
                 offset: offset
             });
